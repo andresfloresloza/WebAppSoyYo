@@ -1,0 +1,89 @@
+.profilePictureContainer {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profilePictureContainer img {
+  border-radius: 50%;
+  width: 125px;
+  height: 125px;
+  /* border: 3px solid rgb(252, 159, 58); */
+  border: 3px solid #4aaed5;
+
+}
+.containerPersonalData {
+  margin-top: 15px;
+}
+.rows {
+  display:  flex;
+
+  align-items: center;
+  margin:auto;
+  margin-top: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  /* height: 40px; */
+  border-radius: 5px;
+  background-color: #eeeeee;
+}
+
+@media screen and (max-width: 768px) {
+ .cols{
+   margin-top: 10px;
+ }
+
+
+
+}
+@media screen and (min-width: 900px) {
+  .main-container {
+    width: 600px;
+  }
+}
+
+
+
+.link{
+  /* color: #a2d4e9;
+  color: #a99ec3; */
+  /* color: #2a136c; */
+  color: #707071;
+  /* color: #1c0261; */
+  /* color: #47a9d3;
+  color: #4aaed5; */
+  font-weight: bolder;
+  text-decoration: none;
+}
+.link:hover {
+  /* color: #a99ec3;
+  color: #707071;
+  color: #2a136c; */
+  color: #222;
+}
+.fileInput {
+  display: none;
+}
+
+.btnEdit {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  height: 100%;
+  cursor: pointer;
+}
+.btnEdit {
+  margin-right: 5px;
+  color: #cccc;
+}
+
+.btnEdit span{
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.btnEdit:hover {
+  color: #222;
+}

@@ -1,0 +1,116 @@
+.nav {
+  background-color: white;
+  /* background-color: #a99ec3; */
+  /* background-color: #2a136c; */
+  /* background-color: #4aaed5; */
+  /* background-color: #a2d4e9; */
+ 
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+.nav a {
+  color: #222;
+  color: #707071;
+  /* color: #a2d4e9; */
+
+  text-decoration: none;
+  padding: 25px 25px;
+  border-bottom: solid 2px transparent;
+}
+
+/* .nav a:hover {
+  border-bottom: solid 2px #222;
+} */
+.nav a:hover{
+  border-bottom: solid 2px #707071;
+  color: #707071;
+  /* color: #222; */
+  /* color: #a99ec3; */
+  border-bottom: solid 2px #a2d4e9;
+  color: #a2d4e9;
+
+}
+.logo img {
+  max-width: 5rem;
+}
+.nav a.logo:hover {
+  border-bottom: none;
+}
+
+.main {
+  margin-bottom: 40px;
+  min-height: 100vh;
+}
+
+.footer {
+  background-color: #a2d4e9;
+  background-color: #a99ec3;
+  background-color: #2a136c;
+  background-color: #1c0261;
+  background-color: #47a9d3;
+  background-color: #4aaed5;
+  
+  color: #ffffffcc;
+  /* color:#fbfbfb; */
+  font-size: 14px;
+  padding-top: 40px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  /* position: relative;
+  bottom: 0;    */
+  display: flex;
+  align-self: flex-end;
+}
+.footer img {
+  margin-bottom: 10px;
+}
+.footer a {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: normal;
+  text-decoration: none;
+}
+.copyright {
+  /* border-top: 1px solid rgba(255, 255, 255, 0.8); */
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.customIcon {
+  width: 15px;
+  text-align: center;
+  margin-right: 10px;
+  font-weight: 400;
+}
+.customLine {
+  font-size: 24px;
+}
+.socialIcon {
+  font-size: 20px;
+}
+
+.footer a:hover,
+.socialIcon:hover {
+  color: #a2d4e9;
+}
+
+@media screen and (min-width: 500px) {
+  .logo img {
+    max-width: 5rem;
+  }
+}
+@media screen and (min-width: 900px) {
+  .logo img {
+    max-width:7rem;
+    max-height: 5rem;
+  }
+  .footer {
+    padding-top: 90px;
+    padding-bottom: 50px;
+  }
+}
