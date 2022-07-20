@@ -1,23 +1,31 @@
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useEffect, useRef, useState } from "react";
 import { Form } from "react-bootstrap";
-import MessageInputs from "../messageInputs";
 import { v4 as uuidv4 } from "uuid";
-import { getLinksBySocialMedia, insertNewLink } from "../../firebase/firebase";
+import {
+  getLinksBySocialMedia,
+  insertNewLinkCustoms,
+  storage,
+} from "../../firebase/firebase";
+import defaultImg from "../../assets/img/undefined.png";
+
 import { link2FieldsWhatsapp } from "../../utils/socialMediaFields";
+import MessageInputsCustoms from "../messageInputsCustoms";
 
 export const FormCustom = ({ style, user }) => {
   const [currentUser, setCurrentUser] = useState(user);
 
   const [openCustom, setOpenCustom] = useState(false);
-  const [customLinkDocId, setCustomLinkDocId] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const [iconFile, setIconFile] = useState(defaultImg);
   const [customUrl, setCustomUrl] = useState("");
+  const [customWebSite, setCustomWebSite] = useState("");
+
   const customUrlRef = useRef(null);
-  const [customSitio, setCustomSitio] = useState("");
-  const customSitioRef = useRef(null);
+  const customWebSiteRef = useRef(null);
 
   useEffect(() => {
-    //initWhatsAppInfo(user.uid);
+    initWhatsAppInfo(user.uid);
   }, []);
 
   async function initWhatsAppInfo(uid) {
@@ -29,32 +37,66 @@ export const FormCustom = ({ style, user }) => {
     }
   }
 
+  const formIcon = async (e) => {
+    e.preventDefault();
+    const file = e.target[0].files[0];
+    await uploadFiles(file);
+    setIconFile("");
+  };
+
+  const uploadFiles = (file) => {
+    if (!file) return;
+    const storageRef = ref(storage, `/icons/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(prog);
+      },
+      (err) => console.log(err),
+      function () {
+        getDownloadURL(uploadTask.snapshot.ref).then((iconUrl) => {
+          setIconFile(iconUrl);
+        });
+      }
+    );
+  };
+
   function addLink() {
-    if (customUrl !== "") {
+    console.log(currentUser.uid);
+    if (customWebSite !== "" && customUrl !== "") {
       const newLink = {
         id: uuidv4(),
-        title: "WhatsApp",
-        category: "primary",
-        socialmedia: "whatsapp",
+        website: customWebSite,
         url: customUrl,
+        icon: iconFile,
         uid: currentUser.uid,
       };
-      const res = insertNewLink(newLink);
+      const res = insertNewLinkCustoms(newLink);
       newLink.docId = res.id;
+      setCustomUrl("");
+      setCustomWebSite("");
       return newLink.docId;
     }
   }
 
   const handleOnSubmitCustom = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    addLink();
-    handleMessageConfirmation();
+    if (customUrl !== "" && customWebSite !== "") {
+      e.preventDefault();
+      e.stopPropagation();
+      addLink();
+      handleMessageConfirmation();
+    }
   };
 
   function handleOnChangeCustomUrl() {
     setCustomUrl(customUrlRef.current.value);
+  }
+  function handleOnChangeCustomWebSite() {
+    setCustomWebSite(customWebSiteRef.current.value);
   }
 
   function handleMessageConfirmation() {
@@ -66,17 +108,31 @@ export const FormCustom = ({ style, user }) => {
 
   return (
     <>
+      {" "}
+      <h2>Datos para los Enlaces Personales</h2>
+      <br />
+      <>
+        <Form onSubmit={formIcon}>
+          <Form.Control className="input" type="file" name="icono" />
+          <br />
+          <br />
+          <button type="submit" className="btn-custom">
+            Subir Icono
+          </button>
+        </Form>
+        <h2>Subiendo {progress}%</h2>
+      </>
+      <br />
       <Form className={style} onSubmit={handleOnSubmitCustom}>
         {openCustom ? (
-          <MessageInputs
+          <MessageInputsCustoms
             open={openCustom}
             type={"success"}
             socialmedia={" "}
-          ></MessageInputs>
+          ></MessageInputsCustoms>
         ) : (
           ""
         )}
-        <h2>Datos para los Enlaces Personales</h2>
 
         <br />
         <Form.Control
@@ -84,8 +140,9 @@ export const FormCustom = ({ style, user }) => {
           type="text"
           name="sitio"
           placeholder="Nombre del Sitio"
-          value={customSitio}
-          ref={customSitioRef}
+          value={customWebSite}
+          ref={customWebSiteRef}
+          onChange={handleOnChangeCustomWebSite}
         />
         <br />
         <Form.Control
@@ -98,12 +155,6 @@ export const FormCustom = ({ style, user }) => {
           onChange={handleOnChangeCustomUrl}
         />
         <br />
-        <Form.Control
-          className="input"
-          type="file"
-          name="file"
-          onChange={(e) => setSelectedFile(e.target.files[0])}
-        />
         <br />
         <input
           className="btn-custom"

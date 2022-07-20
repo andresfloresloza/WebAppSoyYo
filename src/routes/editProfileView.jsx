@@ -27,19 +27,19 @@ export default function EditProfileView() {
   const [career, setCareer] = useState("");
   const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
-const [personalPhone, setPersonalPhone] = useState("");
+  const [personalPhone, setPersonalPhone] = useState("");
   const [editUsername, setEditUsername] = useState(false);
   const [editDisplayName, setEditDisplayName] = useState(false);
   const [editCareer, setEditCareer] = useState(false);
   const [editDescription, setEditDescription] = useState(false);
-const [editPersonalPhone, setEditPersonalPhone] = useState(false);
-const [editEmail, setEditEmail] = useState(false);
+  const [editPersonalPhone, setEditPersonalPhone] = useState(false);
+  const [editEmail, setEditEmail] = useState(false);
   const usernameRef = useRef(null);
   const displayNameRef = useRef(null);
   const careerRef = useRef(null);
   const descriptionRef = useRef(null);
   const personalPhoneRef = useRef(null);
-const emailRef = useRef(null);
+  const emailRef = useRef(null);
   async function handleUserLoggeIn(user) {
     setCurrentUser(user);
     const url = await getProfilePhotoUrl(user.profilePicture);
@@ -67,8 +67,8 @@ const emailRef = useRef(null);
   function handleOnHide() {
     loadPhoto();
     setTimeout(() => {
-       setShow(false);
-    },1400);
+      setShow(false);
+    }, 1400);
   }
 
   function handleEditUsername() {
@@ -338,12 +338,14 @@ const emailRef = useRef(null);
               >
                 soyyo.com/{username}
               </Link> */}
-              <a 
-              className={style.link}
-              rel="noreferrer"
-              target="_blank"
-              href={handleLink()}
-              >Abrir perfil</a>
+              <a
+                className={style.link}
+                rel="noreferrer"
+                target="_blank"
+                href={handleLink()}
+              >
+                Abrir perfil
+              </a>
             </Col>
           </Row>
 
@@ -519,7 +521,10 @@ const emailRef = useRef(null);
                 </Stack>
               ) : (
                 <>
-                  <button className={style.btnEdit} onClick={handleEditPersonalPhone}>
+                  <button
+                    className={style.btnEdit}
+                    onClick={handleEditPersonalPhone}
+                  >
                     <span className="material-icons">edit</span>
                   </button>
                   {personalPhone}

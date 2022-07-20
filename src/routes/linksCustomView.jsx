@@ -1,12 +1,13 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthProviders } from "../components/authProvider";
-import { getLinks } from "../firebase/firebase";
+import { getLinksCustoms } from "../firebase/firebase";
 import DashboardWrapper from "../components/dashboardwrapper";
 import style from "../styles/dashboardView.module.css";
 import { Accordion } from "react-bootstrap";
 import { FormCustom } from "../components/formsCustomLinks/formCustom";
-import { RiFolder3Fill, RiHome4Fill } from "react-icons/ri";
+import { useEffect } from "react";
 
 export default function LinksCustomView() {
   const navigate = useNavigate();
@@ -15,10 +16,19 @@ export default function LinksCustomView() {
   const [state, setState] = useState(0);
   const [links, setLinks] = useState([]);
 
+  useEffect(() => {
+    cargarLista(currentUser);
+  });
+
+  async function cargarLista(currentUser) {
+    const resLinks = await getLinksCustoms(currentUser.uid);
+    setLinks([...resLinks]);
+  }
+
   async function handleUserLoggeIn(user) {
     setCurrentUser(user);
     setState(2);
-    const resLinks = await getLinks(user.uid);
+    const resLinks = await getLinksCustoms(user.uid);
     setLinks([...resLinks]);
   }
   function handleUserNotRegistered(user) {
@@ -59,7 +69,11 @@ export default function LinksCustomView() {
           activeKey={stateAccordion}
           className={style.accordionCustom}
         >
-          <FormCustom></FormCustom>
+          <FormCustom
+            user={currentUser}
+            style={style.entryContainer}
+            handleAccordion={closeAccordion}
+          ></FormCustom>
         </Accordion>
       </div>
       <br />
@@ -69,7 +83,21 @@ export default function LinksCustomView() {
           onSelect={handleSelection}
           activeKey={stateAccordion}
           className={style.accordionCustom}
-        ></Accordion>
+        >
+          {links.map((link, key) => (
+            <Accordion.Item
+              key={key}
+              eventKey={key}
+              className={style.accordionItemCustom}
+            >
+              <Accordion.Header>
+                <img className={style.icono} src={link.icon} />
+                {link.website}
+              </Accordion.Header>
+              <Accordion.Body>{link.url}</Accordion.Body>
+            </Accordion.Item>
+          ))}
+        </Accordion>
       </div>
     </DashboardWrapper>
   );

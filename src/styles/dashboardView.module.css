@@ -5,12 +5,17 @@
   padding: 10px 0;
   margin-bottom: 20px;
 }
-h1{
-    margin: 30px auto;
+h1 {
+  margin: 30px auto;
 }
 .accordionCustom {
   background-color: #eeeeee;
   padding: 15px;
+}
+.icono {
+  padding-right: 10px;
+  width: 40px;
+  height: 30px;
 }
 .accordionCustom .accordionItemCustom {
   margin-top: 5px;

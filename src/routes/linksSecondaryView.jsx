@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthProviders } from "../components/authProvider";
-import {  getLinks} from "../firebase/firebase";
+import { getLinks } from "../firebase/firebase";
 import DashboardWrapper from "../components/dashboardwrapper";
 import style from "../styles/dashboardView.module.css";
 import { Accordion } from "react-bootstrap";
-import { FormFacebook, FormInstagram, FormLinkedIn, FormTikTok, FormTwitch, FormTwitter } from "../components/formsSecundaryLinks";
+import {
+  FormFacebook,
+  FormInstagram,
+  FormLinkedIn,
+  FormTikTok,
+  FormTwitch,
+  FormTwitter,
+} from "../components/formsSecundaryLinks";
 import { FaTiktok, FaTwitterSquare } from "react-icons/fa";
 import {
   RiLinkedinFill,
@@ -67,39 +74,82 @@ export default function LinksSecondaryView() {
           className={style.accordionCustom}
         >
           <Accordion.Item eventKey="1" className={style.accordionItemCustom}>
-            <Accordion.Header><RiLinkedinFill className={style.linkIcon}/>Linkedin</Accordion.Header>
+            <Accordion.Header>
+              <RiLinkedinFill className={style.linkIcon} />
+              Linkedin
+            </Accordion.Header>
             <Accordion.Body>
-              <FormLinkedIn user={currentUser} style={style.entryContainer} handleAccordion={closeAccordion} />
+              <FormLinkedIn
+                user={currentUser}
+                style={style.entryContainer}
+                handleAccordion={closeAccordion}
+              />
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2" className={style.accordionItemCustom}>
-            <Accordion.Header> <RiFacebookBoxFill className={style.linkIcon} /> Facebook</Accordion.Header>
+            <Accordion.Header>
+              {" "}
+              <RiFacebookBoxFill className={style.linkIcon} /> Facebook
+            </Accordion.Header>
             <Accordion.Body>
-              <FormFacebook user={currentUser} style={style.entryContainer} handleAccordion={closeAccordion} />
+              <FormFacebook
+                user={currentUser}
+                style={style.entryContainer}
+                handleAccordion={closeAccordion}
+              />
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="3" className={style.accordionItemCustom}>
-            <Accordion.Header> <RiInstagramLine className={style.linkIcon} /> Instagram</Accordion.Header>
+            <Accordion.Header>
+              {" "}
+              <RiInstagramLine className={style.linkIcon} /> Instagram
+            </Accordion.Header>
             <Accordion.Body>
-            <FormInstagram user={currentUser} style={style.entryContainer} handleAccordion={closeAccordion} />
+              <FormInstagram
+                user={currentUser}
+                style={style.entryContainer}
+                handleAccordion={closeAccordion}
+              />
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="4" className={style.accordionItemCustom}>
-            <Accordion.Header> <FaTiktok className={style.linkIcon} />Tiktok</Accordion.Header>
+            <Accordion.Header>
+              {" "}
+              <FaTiktok className={style.linkIcon} />
+              Tiktok
+            </Accordion.Header>
             <Accordion.Body>
-            <FormTikTok user={currentUser} style={style.entryContainer}  handleAccordion={closeAccordion}/>
+              <FormTikTok
+                user={currentUser}
+                style={style.entryContainer}
+                handleAccordion={closeAccordion}
+              />
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="5" className={style.accordionItemCustom}>
-            <Accordion.Header><FaTwitterSquare className={style.linkIcon} />Twitter</Accordion.Header>
+            <Accordion.Header>
+              <FaTwitterSquare className={style.linkIcon} />
+              Twitter
+            </Accordion.Header>
             <Accordion.Body>
-            <FormTwitter user={currentUser} style={style.entryContainer} handleAccordion={closeAccordion} />
+              <FormTwitter
+                user={currentUser}
+                style={style.entryContainer}
+                handleAccordion={closeAccordion}
+              />
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="6" className={style.accordionItemCustom}>
-            <Accordion.Header><RiTwitchFill className={style.linkIcon} />Twitch</Accordion.Header>
+            <Accordion.Header>
+              <RiTwitchFill className={style.linkIcon} />
+              Twitch
+            </Accordion.Header>
             <Accordion.Body>
-            <FormTwitch user={currentUser} style={style.entryContainer}  handleAccordion={closeAccordion}/>
+              <FormTwitch
+                user={currentUser}
+                style={style.entryContainer}
+                handleAccordion={closeAccordion}
+              />
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

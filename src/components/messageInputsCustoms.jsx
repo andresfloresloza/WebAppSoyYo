@@ -1,11 +1,11 @@
 import { Alert, Fade } from "react-bootstrap";
 
-export default function MessageInputs({ open, type, socialmedia }) {
+export default function MessageInputsCustoms({ open, type }) {
   return (
     <Fade in={open} timeout={400}>
       <div>
         <Alert variant={type}>
-          El enlace de tu <strong>{socialmedia}</strong>{" "}
+          El enlace de tu sitio{" "}
           {type === "success"
             ? " se guardo exitosamente"
             : type === "danger"
