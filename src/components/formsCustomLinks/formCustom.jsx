@@ -39,7 +39,7 @@ export const FormCustom = ({ style, user }) => {
 
   const formIcon = async (e) => {
     e.preventDefault();
-    const file = e.target[0].files[0];
+    const file = e.target.files[0];
     await uploadFiles(file);
     setIconFile("");
   };
@@ -112,20 +112,6 @@ export const FormCustom = ({ style, user }) => {
       {" "}
       <h2>Datos para los Enlaces Personales</h2>
       <br />
-      <>
-        <Form onSubmit={formIcon}>
-          <Form.Control className="input" type="file" name="icono" />
-          <br />
-          <div>
-            <button type="submit" className="btn-custom">
-              Subir Icono
-            </button>{" "}
-            <br />
-            <h2>Subiendo {progress}%</h2>
-          </div>
-        </Form>
-      </>
-      <br />
       <Form className={style} onSubmit={handleOnSubmitCustom}>
         {openCustom ? (
           <MessageInputsCustoms
@@ -157,6 +143,17 @@ export const FormCustom = ({ style, user }) => {
           ref={customUrlRef}
           onChange={handleOnChangeCustomUrl}
         />
+        <br />
+        <>
+          <Form.Control
+            className="input"
+            type="file"
+            name="icono"
+            onChange={formIcon}
+          />
+          <br />
+          <h2>Subiendo {progress}%</h2>
+        </>
         <br />
         <br />
         <input
