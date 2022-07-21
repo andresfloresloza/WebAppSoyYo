@@ -183,46 +183,41 @@ export default function EditProfileView() {
       if (exists) {
         setState(5);
       } else {
-        const tmp = { ...currentUser };
-        tmp.username = username;
-        await updateUser(tmp);
+        currentUser.username = username;
+        await updateUser(currentUser);
         setState(6);
       }
     }
   }
+
   async function handleUpdateDisplayName() {
     if (displayName !== "") {
-      const tmp = { ...currentUser };
-      tmp.displayName = displayName;
-      await updateUser(tmp);
+      currentUser.displayName = displayName;
+      await updateUser(currentUser);
     }
   }
   async function handleUpdateCareer() {
     if (career !== "") {
-      const tmp = { ...currentUser };
-      tmp.career = career;
-      await updateUser(tmp);
+      currentUser.career = career;
+      await updateUser(currentUser);
     }
   }
   async function handleUpdatePersonalPhone() {
     if (personalPhone !== "") {
-      const tmp = { ...currentUser };
-      tmp.personalPhone = personalPhone;
-      await updateUser(tmp);
+      currentUser.personalPhone = personalPhone;
+      await updateUser(currentUser);
     }
   }
   async function handleUpdateEmail() {
     if (email !== "") {
-      const tmp = { ...currentUser };
-      tmp.email = email;
-      await updateUser(tmp);
+      currentUser.email = email;
+      await updateUser(currentUser);
     }
   }
   async function handleUpdateDescription() {
     if (description !== "") {
-      const tmp = { ...currentUser };
-      tmp.description = description;
-      await updateUser(tmp);
+      currentUser.description = description;
+      await updateUser(currentUser);
     }
   }
 
