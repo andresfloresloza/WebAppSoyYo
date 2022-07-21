@@ -3,7 +3,7 @@ import {
   FacebookAuthProvider,
   signInWithPopup,
   fetchSignInMethodsForEmail,
-  EmailAuthProvider
+  EmailAuthProvider,
 } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -70,24 +70,26 @@ export default function LoginView() {
       if (error.code == "auth/account-exists-with-different-credential") {
         existingEmail = error.email;
         pendinCredentials = error.credential;
-        fetchSignInMethodsForEmail(auth, existingEmail).then((signInMethods) => {
-          if (
-            signInMethods.indexOf(
-              EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
-            ) != -1
-          ) {
-            // User can sign in with email/password.
-            console.log(" sign in with  email/password.");
+        fetchSignInMethodsForEmail(auth, existingEmail).then(
+          (signInMethods) => {
+            if (
+              signInMethods.indexOf(
+                EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
+              ) != -1
+            ) {
+              // User can sign in with email/password.
+              console.log(" sign in with  email/password.");
+            }
+            if (
+              signInMethods.indexOf(
+                EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
+              ) != -1
+            ) {
+              // User can sign in with email/link.
+              console.log(" sign in with email/link.");
+            }
           }
-          if (
-            signInMethods.indexOf(
-              EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
-            ) != -1
-          ) {
-            // User can sign in with email/link.
-            console.log(" sign in with email/link.");
-          }
-        });
+        );
       }
     }
   }

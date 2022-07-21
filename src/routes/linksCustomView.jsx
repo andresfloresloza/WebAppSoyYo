@@ -7,7 +7,6 @@ import DashboardWrapper from "../components/dashboardwrapper";
 import style from "../styles/dashboardView.module.css";
 import { Accordion } from "react-bootstrap";
 import { FormCustom } from "../components/formsCustomLinks/formCustom";
-import { useEffect } from "react";
 
 export default function LinksCustomView() {
   const navigate = useNavigate();
@@ -15,15 +14,6 @@ export default function LinksCustomView() {
   const [stateAccordion, setStateAccordion] = useState("0");
   const [state, setState] = useState(0);
   const [links, setLinks] = useState([]);
-
-  useEffect(() => {
-    cargarLista(currentUser);
-  });
-
-  async function cargarLista(currentUser) {
-    const resLinks = await getLinksCustoms(currentUser.uid);
-    setLinks([...resLinks]);
-  }
 
   async function handleUserLoggeIn(user) {
     setCurrentUser(user);

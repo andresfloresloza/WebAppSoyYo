@@ -103,6 +103,7 @@ export const FormCustom = ({ style, user }) => {
     setOpenCustom(true);
     setTimeout(() => {
       setOpenCustom(false);
+      window.location.reload();
     }, 3000);
   }
 
@@ -115,12 +116,14 @@ export const FormCustom = ({ style, user }) => {
         <Form onSubmit={formIcon}>
           <Form.Control className="input" type="file" name="icono" />
           <br />
-          <br />
-          <button type="submit" className="btn-custom">
-            Subir Icono
-          </button>
+          <div>
+            <button type="submit" className="btn-custom">
+              Subir Icono
+            </button>{" "}
+            <br />
+            <h2>Subiendo {progress}%</h2>
+          </div>
         </Form>
-        <h2>Subiendo {progress}%</h2>
       </>
       <br />
       <Form className={style} onSubmit={handleOnSubmitCustom}>
